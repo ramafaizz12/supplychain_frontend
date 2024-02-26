@@ -8,6 +8,6 @@ import '../../bloc/Auth/auth_bloc.dart';
 import '../../shared/theme.dart';
 
 part 'Button_Utama.dart';
-part 'Input_Widget.dart';
+part 'input_widget.dart';
 part 'button_logout.dart';
 part 'status.dart';
