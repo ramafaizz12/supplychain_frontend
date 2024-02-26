@@ -10,15 +10,17 @@ class GetDataBeras extends SupplychainEvent {
 
 class CreateAsset extends SupplychainEvent {
   String? id;
-  String? jenisberas;
   String? namapetani;
   String? alamat;
+  String? nohp;
+  String? lamapanen;
   String? tanggalpanen;
 
   CreateAsset(
       {this.id,
-      this.jenisberas,
       this.namapetani,
+      this.nohp,
+      this.lamapanen,
       this.alamat,
       this.tanggalpanen});
 }
@@ -41,3 +43,5 @@ class LockAsset extends SupplychainEvent {
 
   LockAsset({this.id});
 }
+
+class ToInitial extends SupplychainEvent {}

@@ -1,9 +1,9 @@
 part of 'widgets.dart';
 
 class ButtonLogout extends StatelessWidget {
-  double width;
-  double height;
-  ButtonLogout({super.key, required this.width, required this.height});
+  final double width;
+  final double height;
+  const ButtonLogout({super.key, required this.width, required this.height});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:supplychain_beras/services/auth_service.dart';
-
 import '../../models/DataBeras.dart';
 
 part 'supplychain_event.dart';
@@ -13,7 +12,7 @@ class SupplychainBloc extends Bloc<SupplychainEvent, SupplychainState> {
       if (event is GetDataBeras) {
         emit(DataBerasLoading());
         try {
-          var data = await auth.GetDataBeras(id: event.id);
+          var data = await auth.getDataBeras(id: event.id);
           emit(DataBerasLoaded(data: data));
         } catch (e) {
           emit(DataBerasFailed(err: e.toString()));
@@ -25,7 +24,8 @@ class SupplychainBloc extends Bloc<SupplychainEvent, SupplychainState> {
         try {
           await auth.createasset(
               id: event.id,
-              jenisberas: event.jenisberas,
+              nohp: event.nohp,
+              lamapanen: event.lamapanen,
               namapetani: event.namapetani,
               alamat: event.alamat,
               tanggalpanen: event.tanggalpanen);
@@ -41,7 +41,7 @@ class SupplychainBloc extends Bloc<SupplychainEvent, SupplychainState> {
             id: event.id,
           );
           emit(DataBerasSukses());
-          var data = await auth.GetDataBeras(id: event.id);
+          var data = await auth.getDataBeras(id: event.id);
           emit(DataBerasLoaded(data: data));
         } catch (e) {
           emit(DataBerasFailed(err: e.toString()));
@@ -60,6 +60,10 @@ class SupplychainBloc extends Bloc<SupplychainEvent, SupplychainState> {
         } catch (e) {
           emit(DataBerasFailed(err: e.toString()));
         }
+      }
+
+      if (event is ToInitial) {
+        emit(SupplychainInitial());
       }
     });
   }

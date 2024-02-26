@@ -12,9 +12,12 @@ class DataBeras {
   bool? konfirmasidistributor;
   bool? konfirmasiwholesaler;
   bool? konfirmasiretailer;
+  String? jumlahToWholesaler;
   String? tanggaldiolah;
+  String? No_hp;
+  String? Npwp;
   String? alamatperusahaan;
-  String? jumlah;
+  String? jumlahToRetailer;
   String? timestamp;
 
   DataBeras(
@@ -29,8 +32,11 @@ class DataBeras {
       this.konfirmasiwholesaler,
       this.alamatperusahaan,
       this.tanggaldiolah,
+      this.No_hp,
+      this.Npwp,
+      this.jumlahToRetailer,
       this.timestamp,
-      this.jumlah});
+      this.jumlahToWholesaler});
 
   factory DataBeras.fromJson(Map<String, dynamic> data) =>
       _$DataBerasFromJson(data);

@@ -4,11 +4,10 @@ class ButtonUtama extends StatelessWidget {
   final double? width;
   final double? height;
   final String? namabutton;
-  Color? color;
 
   final VoidCallback? voidcallback;
 
-  ButtonUtama({
+  const ButtonUtama({
     super.key,
     this.width,
     this.height,

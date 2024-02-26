@@ -6,7 +6,9 @@ class UserLogin {
       TextEditingController id,
       TextEditingController nama,
       TextEditingController alamat,
-      TextEditingController jenisberas,
+      TextEditingController nohp,
+      TextEditingController npwp,
+      TextEditingController lamapanen,
       TextEditingController tanggalpanen) {
     return LayoutBuilder(
       builder: (context, p1) => Column(
@@ -38,9 +40,14 @@ class UserLogin {
             controller: alamat,
           ),
           InputWidget(
-            namainput: "Jenis Beras",
+            namainput: "Lama Panen",
             fontsize: p1.maxHeight * 0.02,
-            controller: jenisberas,
+            controller: lamapanen,
+          ),
+          InputWidget(
+            namainput: "No HP",
+            fontsize: p1.maxHeight * 0.02,
+            controller: nohp,
           ),
           InputWidget(
             namainput: "Tanggal Panen",
@@ -49,12 +56,11 @@ class UserLogin {
             onTap: () async {
               DateTime? pickedDate = await showDatePicker(
                   context: context,
-                  initialDate: DateTime.now(), //get today's date
-                  firstDate: DateTime(
-                      2000), //DateTime.now() - not to allow to choose before today.
-                  lastDate: DateTime(2101));
-
-              tanggalpanen.text = pickedDate.toString();
+                  initialDate: DateTime.now(),
+                  initialDatePickerMode: DatePickerMode.day,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2025));
+              tanggalpanen.text = pickedDate!.toString();
             },
           ),
           SizedBox(
@@ -68,9 +74,10 @@ class UserLogin {
               voidcallback: () {
                 context.read<SupplychainBloc>().add(CreateAsset(
                     id: id.text,
-                    jenisberas: jenisberas.text,
                     namapetani: nama.text,
                     alamat: alamat.text,
+                    nohp: nohp.text,
+                    lamapanen: lamapanen.text,
                     tanggalpanen: tanggalpanen.text));
               },
             ),
@@ -80,10 +87,16 @@ class UserLogin {
     );
   }
 
-  Widget userManufacturer(
+  Widget userLain(
     TextEditingController id,
-    TextEditingController tanggaldiolah,
-    TextEditingController alamatperusahaan,
+    TextEditingController lamapengeringan,
+    TextEditingController lamapenyimpanan,
+    TextEditingController kadarair,
+    TextEditingController derajasosoh,
+    TextEditingController beraskepala,
+    TextEditingController butirpatah,
+    TextEditingController butirgabah,
+    TextEditingController bendalain,
     TextEditingController jumlah,
   ) {
     return BlocBuilder<SupplychainBloc, SupplychainState>(
@@ -123,38 +136,19 @@ class UserLogin {
                               .add(LockAsset(id: id.text));
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               )
             : state.data!.konfirmasimanufacturer == true
-                ? transferuser(
-                    assets: id.text,
-                    id: id,
-                    tanggaldiolah: tanggaldiolah,
-                    alamatperusahaan: alamatperusahaan,
-                    jumlah: jumlah)
+                ? transferuser(assets: id.text, id: id, jumlah: jumlah)
                 : state.data!.konfirmasidistributor == true
-                    ? transferuser(
-                        assets: id.text,
-                        id: id,
-                        tanggaldiolah: tanggaldiolah,
-                        alamatperusahaan: alamatperusahaan,
-                        jumlah: jumlah)
+                    ? transferuser(assets: id.text, id: id, jumlah: jumlah)
                     : state.data!.konfirmasiwholesaler == true
-                        ? transferuser(
-                            assets: id.text,
-                            id: id,
-                            tanggaldiolah: tanggaldiolah,
-                            alamatperusahaan: alamatperusahaan,
-                            jumlah: jumlah)
+                        ? transferuser(assets: id.text, id: id, jumlah: jumlah)
                         : state.data!.konfirmasiretailer == true
                             ? transferuser(
-                                assets: id.text,
-                                id: id,
-                                tanggaldiolah: tanggaldiolah,
-                                alamatperusahaan: alamatperusahaan,
-                                jumlah: jumlah)
+                                assets: id.text, id: id, jumlah: jumlah)
                             : const SizedBox();
       },
     );
@@ -163,8 +157,14 @@ class UserLogin {
   Widget transferuser({
     String? assets,
     TextEditingController? id,
-    TextEditingController? tanggaldiolah,
-    TextEditingController? alamatperusahaan,
+    TextEditingController? lamapengeringan,
+    TextEditingController? lamapenyimpanan,
+    TextEditingController? kadarair,
+    TextEditingController? derajatsosoh,
+    TextEditingController? beraskepala,
+    TextEditingController? butirpatah,
+    TextEditingController? butirgabah,
+    TextEditingController? bendalain,
     TextEditingController? jumlah,
   }) {
     return LayoutBuilder(
@@ -188,23 +188,62 @@ class UserLogin {
                     ),
                     state.org == "manufacturer"
                         ? InputWidget(
-                            namainput: "Tanggal Diolah",
+                            namainput: "Lama Pengeringan",
                             fontsize: p1.maxHeight * 0.02,
-                            controller: tanggaldiolah,
+                            controller: lamapengeringan,
                           )
                         : const SizedBox(),
                     state.org == "manufacturer"
                         ? InputWidget(
-                            namainput: "Alamat Perusahaan",
+                            namainput: "Lama Penyimpanan",
                             fontsize: p1.maxHeight * 0.02,
-                            controller: alamatperusahaan,
+                            controller: lamapenyimpanan,
                           )
-                        : const SizedBox(),
-                    state.org != "manufacturer"
-                        ? InputWidget(
+                        : InputWidget(
                             namainput: "Jumlah",
                             fontsize: p1.maxHeight * 0.02,
                             controller: jumlah,
+                          ),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Kadar Air",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: kadarair,
+                          )
+                        : const SizedBox(),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Derajat Sosoh",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: derajatsosoh,
+                          )
+                        : const SizedBox(),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Beras Kepala",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: beraskepala,
+                          )
+                        : const SizedBox(),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Butir Patah",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: butirpatah,
+                          )
+                        : const SizedBox(),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Butir Gabah",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: butirgabah,
+                          )
+                        : const SizedBox(),
+                    state.org == "manufacturer"
+                        ? InputWidget(
+                            namainput: "Benda Lain",
+                            fontsize: p1.maxHeight * 0.02,
+                            controller: bendalain,
                           )
                         : const SizedBox(),
                     SizedBox(
@@ -216,11 +255,8 @@ class UserLogin {
                         height: p1.maxHeight * 0.06,
                         namabutton: "Transfer Asset",
                         voidcallback: () {
-                          context.read<SupplychainBloc>().add(TransferAsset(
-                              id: assets,
-                              tanggaldiolah: tanggaldiolah!.text,
-                              alamatperusahaan: alamatperusahaan!.text,
-                              jumlah: jumlah!.text));
+                          context.read<SupplychainBloc>().add(
+                              TransferAsset(id: assets, jumlah: jumlah!.text));
                         },
                       ),
                     )
@@ -282,8 +318,8 @@ class UserLogin {
                       height: p1.maxHeight * 0.02,
                     ),
                     Container(
-                      width: p1.maxWidth * 0.7,
-                      height: p1.maxHeight * 0.34,
+                      width: p1.maxWidth * 0.94,
+                      height: p1.maxHeight * 0.4,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -350,6 +386,19 @@ class UserLogin {
                               children: [
                                 Text("Tanggal Panen: ", style: textpoppins),
                                 Text("${state.data!.tanggalpanen}",
+                                    style: textpoppins)
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("No_Hp: ", style: textpoppins),
+                                Text("${state.data!.No_hp}", style: textpoppins)
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("TimeStamp: ", style: textpoppins),
+                                Text("${state.data!.timestamp}",
                                     style: textpoppins)
                               ],
                             )

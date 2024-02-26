@@ -1,22 +1,43 @@
 part of 'pages.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<SupplychainBloc>().add(ToInitial());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController id = TextEditingController();
-    final TextEditingController tanggaldiolah = TextEditingController();
-    final TextEditingController alamatperusahaan = TextEditingController();
     final TextEditingController jumlah = TextEditingController();
+    final TextEditingController lamapengeringan = TextEditingController();
+    final TextEditingController lamapenyimpanan = TextEditingController();
+    final TextEditingController derajatsosoh = TextEditingController();
+    final TextEditingController beraskepala = TextEditingController();
+    final TextEditingController butirpatah = TextEditingController();
+    final TextEditingController butirgabah = TextEditingController();
+    final TextEditingController bendalain = TextEditingController();
+    final TextEditingController kadarair = TextEditingController();
     final TextEditingController nama = TextEditingController();
+    final TextEditingController nohp = TextEditingController();
+    final TextEditingController npwp = TextEditingController();
     final TextEditingController alamat = TextEditingController();
     final TextEditingController jenisberas = TextEditingController();
     final TextEditingController tanggalpanen = TextEditingController();
     UserLogin user = UserLogin();
-    closebutton() {
-      Navigator.pop(context);
-    }
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -44,12 +65,15 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const HomePage(),
-                                            ));
+                                        context
+                                            .read<SupplychainBloc>()
+                                            .add(ToInitial());
+                                        // Navigator.pushReplacement(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           const HomePage(),
+                                        //     ));
                                       },
                                       child: Icon(
                                         Icons.arrow_back_ios,
@@ -84,14 +108,20 @@ class HomePage extends StatelessWidget {
                                     left: p1.maxHeight * 0.02,
                                     right: p1.maxHeight * 0.02),
                                 child: state.org == "farmer"
-                                    ? user.userFarmer(id, nama, alamat,
-                                        jenisberas, tanggalpanen)
+                                    ? user.userFarmer(id, nama, alamat, nohp,
+                                        npwp, jenisberas, tanggalpanen)
                                     : state.org == "consumer"
                                         ? user.userConsumer(id)
-                                        : user.userManufacturer(
+                                        : user.userLain(
                                             id,
-                                            tanggaldiolah,
-                                            alamatperusahaan,
+                                            lamapengeringan,
+                                            lamapenyimpanan,
+                                            kadarair,
+                                            derajatsosoh,
+                                            beraskepala,
+                                            butirpatah,
+                                            butirgabah,
+                                            bendalain,
                                             jumlah)),
                           ),
                         )
@@ -101,47 +131,5 @@ class HomePage extends StatelessWidget {
             },
           ),
         )));
-  }
-
-  Widget onstatus() {
-    return BlocListener<SupplychainBloc, SupplychainState>(
-        listener: (context, state) {
-          if (state is DataBerasSukses) {
-            QuickAlert.show(
-                context: context,
-                type: QuickAlertType.success,
-                text: 'Data Berhasil Disimpan',
-                onConfirmBtnTap: () {
-                  Navigator.pop(context);
-                },
-                confirmBtnColor: bluecolor,
-                confirmBtnTextStyle: textpoppins.copyWith(color: whitecolor));
-          }
-          if (state is DataBerasLoading) {
-            QuickAlert.show(
-                context: context,
-                type: QuickAlertType.loading,
-                text: "Mohon Tunggu",
-                autoCloseDuration: const Duration(seconds: 2),
-                onConfirmBtnTap: () {
-                  Navigator.pop(context);
-                },
-                confirmBtnColor: bluecolor,
-                confirmBtnTextStyle: textpoppins.copyWith(color: whitecolor));
-          }
-
-          if (state is DataBerasFailed) {
-            QuickAlert.show(
-                context: context,
-                type: QuickAlertType.error,
-                text: "Terjadi Kesalahan",
-                onConfirmBtnTap: () {
-                  Navigator.pop(context);
-                },
-                confirmBtnColor: bluecolor,
-                confirmBtnTextStyle: textpoppins.copyWith(color: whitecolor));
-          }
-        },
-        child: Container());
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "578072334136",
+    "project_id": "supplychainhyperledger",
+    "storage_bucket": "supplychainhyperledger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578072334136:android:30cff14d5abf2187efbbcd",
+        "android_client_info": {
+          "package_name": "com.example.supplychain_beras"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB97BQvt8pbM0eSSmMs1qtGMx4PzsvTRSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

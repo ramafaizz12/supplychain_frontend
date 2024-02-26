@@ -7,19 +7,22 @@ part of 'DataBeras.dart';
 // **************************************************************************
 
 DataBeras _$DataBerasFromJson(Map<String, dynamic> json) => DataBeras(
-      id: json['ID'] as String?,
-      jenisberas: json['jenis_beras'] as String?,
-      namapetani: json['nama_petani'] as String?,
-      alamatpetani: json['alamat'] as String?,
-      tanggalpanen: json['tanggal_panen'] as String?,
-      konfirmasimanufacturer: json['konfirmasi_manufacturer'] as bool?,
-      konfirmasidistributor: json['konfirmasi_distributor'] as bool?,
-      konfirmasiretailer: json['konfirmasi_retailer'] as bool?,
-      konfirmasiwholesaler: json['konfirmasi_wholesaler'] as bool?,
-      alamatperusahaan: json['alamat_perusahaan'] as String?,
-      tanggaldiolah: json['tanggal_diolah'] as String?,
+      id: json['id'] as String?,
+      jenisberas: json['jenisberas'] as String?,
+      namapetani: json['namapetani'] as String?,
+      alamatpetani: json['alamatpetani'] as String?,
+      tanggalpanen: json['tanggalpanen'] as String?,
+      konfirmasimanufacturer: json['konfirmasimanufacturer'] as bool?,
+      konfirmasidistributor: json['konfirmasidistributor'] as bool?,
+      konfirmasiretailer: json['konfirmasiretailer'] as bool?,
+      konfirmasiwholesaler: json['konfirmasiwholesaler'] as bool?,
+      alamatperusahaan: json['alamatperusahaan'] as String?,
+      tanggaldiolah: json['tanggaldiolah'] as String?,
+      No_hp: json['No_hp'] as String?,
+      Npwp: json['Npwp'] as String?,
+      jumlahToRetailer: json['jumlahToRetailer'] as String?,
       timestamp: json['timestamp'] as String?,
-      jumlah: json['jumlah'] as String?,
+      jumlahToWholesaler: json['jumlahToWholesaler'] as String?,
     );
 
 Map<String, dynamic> _$DataBerasToJson(DataBeras instance) => <String, dynamic>{
@@ -32,8 +35,11 @@ Map<String, dynamic> _$DataBerasToJson(DataBeras instance) => <String, dynamic>{
       'konfirmasidistributor': instance.konfirmasidistributor,
       'konfirmasiwholesaler': instance.konfirmasiwholesaler,
       'konfirmasiretailer': instance.konfirmasiretailer,
+      'jumlahToWholesaler': instance.jumlahToWholesaler,
       'tanggaldiolah': instance.tanggaldiolah,
+      'No_hp': instance.No_hp,
+      'Npwp': instance.Npwp,
       'alamatperusahaan': instance.alamatperusahaan,
-      'jumlah': instance.jumlah,
+      'jumlahToRetailer': instance.jumlahToRetailer,
       'timestamp': instance.timestamp,
     };

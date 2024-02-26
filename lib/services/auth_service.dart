@@ -5,12 +5,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:supplychain_beras/services/firebase_service.dart';
 
 import '../models/DataBeras.dart';
 
 class AuthService {
   final FlutterSecureStorage storage = const FlutterSecureStorage();
-  var baseurl = "http://10.163.10.46:4444";
+  final FirebaseService servis = FirebaseService();
+  String? baseurl = "http://192.168.1.5:4444";
 
   Future<bool> hasToken() async {
     var value = await storage.read(key: 'token');
@@ -37,24 +39,27 @@ class AuthService {
 
   Future<bool> createasset({
     String? id,
-    String? jenisberas,
     String? namapetani,
     String? alamat,
+    String? nohp,
+    String? lamapanen,
     String? tanggalpanen,
   }) async {
     var token = await gettoken();
+    var ip = await servis.getdataip();
     var dio = Dio();
     dio.options.headers = {
       'Authorization': token,
     };
-    dio.options.baseUrl = '$baseurl/CreateAsset';
+    dio.options.baseUrl = '$ip/CreateAsset';
 
     var formdata = FormData.fromMap({
       'Id': id,
-      'Jenis_Beras': jenisberas,
       'Nama_Petani': namapetani,
       'Alamat': alamat,
+      'No_hp': nohp,
       'Tanggal_Panen': tanggalpanen,
+      'Lama_panen': lamapanen
     });
     var response = await dio.post(
       dio.options.baseUrl,
@@ -68,16 +73,17 @@ class AuthService {
     }
   }
 
-  Future<DataBeras> GetDataBeras({
+  Future<DataBeras> getDataBeras({
     String? id,
   }) async {
     var token = await gettoken();
+    var ip = await servis.getdataip();
     var dio = Dio();
     dio.options.headers = {
       'Authorization': token,
       'Accept': 'application/json',
     };
-    dio.options.baseUrl = '$baseurl/ReadAsset';
+    dio.options.baseUrl = '$ip/ReadAsset';
 
     var formdata = FormData.fromMap({
       'Id': id,
@@ -102,12 +108,13 @@ class AuthService {
     String? jumlah,
   }) async {
     var token = await gettoken();
+    var ip = await servis.getdataip();
     var dio = Dio();
     dio.options.headers = {
       'Authorization': token,
       'Accept': 'application/json',
     };
-    dio.options.baseUrl = '$baseurl/AssetTransfer';
+    dio.options.baseUrl = '$ip/AssetTransfer';
 
     var formdata = FormData.fromMap({
       'Id': id,
@@ -131,12 +138,13 @@ class AuthService {
     String? id,
   }) async {
     var token = await gettoken();
+    var ip = await servis.getdataip();
     var dio = Dio();
     dio.options.headers = {
       'Authorization': token,
       'Accept': 'application/json',
     };
-    dio.options.baseUrl = '$baseurl/LockAsset';
+    dio.options.baseUrl = '$ip/LockAsset';
 
     var formdata = FormData.fromMap({
       'Id': id,
@@ -154,7 +162,8 @@ class AuthService {
   }
 
   Future loginapi(String? email, String? password, String? organization) async {
-    var loginurl = await http.post(Uri.parse('$baseurl/login'), body: {
+    var ip = await servis.getdataip();
+    var loginurl = await http.post(Uri.parse('$ip/login'), body: {
       'email': email,
       'password': password,
       'organization': organization

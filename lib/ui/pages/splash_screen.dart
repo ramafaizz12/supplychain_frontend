@@ -10,7 +10,7 @@ class Splashscreen extends StatelessWidget {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Wrapper(),
+              builder: (context) => const Wrapper(),
             )));
     return Scaffold(
       backgroundColor: backgroudcolor,
