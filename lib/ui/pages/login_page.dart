@@ -17,7 +17,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   String? organization;
-  AuthService auth = AuthService();
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   bool isemailvalid = false;
@@ -169,7 +168,6 @@ class _LoginPageState extends State<LoginPage> {
                                 "farmer",
                                 "manufacturer",
                                 "distributor",
-                                "retailer",
                                 "wholesaler",
                                 "consumer"
                               ],
@@ -211,10 +209,6 @@ class _LoginPageState extends State<LoginPage> {
                                             namabutton: "Login",
                                             voidcallback: () {
                                               _onLoginbuttonpressed();
-                                              // await auth.loginapi(
-                                              //     "ramafais27@gmail.com",
-                                              //     "121289",
-                                              //     "manufacturer");
                                             },
                                           ),
                                         ],

@@ -3,37 +3,33 @@ part 'DataBeras.g.dart';
 
 @JsonSerializable()
 class DataBeras {
-  String? id;
+  String? ID;
   String? jenisberas;
   String? namapetani;
   String? alamatpetani;
   String? tanggalpanen;
-  bool? konfirmasimanufacturer;
-  bool? konfirmasidistributor;
-  bool? konfirmasiwholesaler;
-  bool? konfirmasiretailer;
+  bool? konfirmasi_manufacturer;
+  bool? konfirmasi_distributor;
+  bool? konfirmasi_wholesaler;
   String? jumlahToWholesaler;
   String? tanggaldiolah;
-  String? No_hp;
-  String? Npwp;
+  String? no_hp;
   String? alamatperusahaan;
   String? jumlahToRetailer;
   String? timestamp;
 
   DataBeras(
-      {this.id,
+      {this.ID,
       this.jenisberas,
       this.namapetani,
       this.alamatpetani,
       this.tanggalpanen,
-      this.konfirmasimanufacturer,
-      this.konfirmasidistributor,
-      this.konfirmasiretailer,
-      this.konfirmasiwholesaler,
+      this.konfirmasi_manufacturer,
+      this.konfirmasi_distributor,
+      this.konfirmasi_wholesaler,
       this.alamatperusahaan,
       this.tanggaldiolah,
-      this.No_hp,
-      this.Npwp,
+      this.no_hp,
       this.jumlahToRetailer,
       this.timestamp,
       this.jumlahToWholesaler});

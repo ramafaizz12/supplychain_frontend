@@ -21,24 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController id = TextEditingController();
-    final TextEditingController jumlah = TextEditingController();
-    final TextEditingController lamapengeringan = TextEditingController();
-    final TextEditingController lamapenyimpanan = TextEditingController();
-    final TextEditingController derajatsosoh = TextEditingController();
-    final TextEditingController beraskepala = TextEditingController();
-    final TextEditingController butirpatah = TextEditingController();
-    final TextEditingController butirgabah = TextEditingController();
-    final TextEditingController bendalain = TextEditingController();
-    final TextEditingController kadarair = TextEditingController();
-    final TextEditingController nama = TextEditingController();
-    final TextEditingController nohp = TextEditingController();
-    final TextEditingController npwp = TextEditingController();
-    final TextEditingController alamat = TextEditingController();
-    final TextEditingController jenisberas = TextEditingController();
-    final TextEditingController tanggalpanen = TextEditingController();
-    UserLogin user = UserLogin();
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
@@ -68,12 +50,6 @@ class _HomePageState extends State<HomePage> {
                                         context
                                             .read<SupplychainBloc>()
                                             .add(ToInitial());
-                                        // Navigator.pushReplacement(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           const HomePage(),
-                                        //     ));
                                       },
                                       child: Icon(
                                         Icons.arrow_back_ios,
@@ -108,26 +84,15 @@ class _HomePageState extends State<HomePage> {
                                     left: p1.maxHeight * 0.02,
                                     right: p1.maxHeight * 0.02),
                                 child: state.org == "farmer"
-                                    ? user.userFarmer(id, nama, alamat, nohp,
-                                        npwp, jenisberas, tanggalpanen)
+                                    ? userFarmer()
                                     : state.org == "consumer"
-                                        ? user.userConsumer(id)
-                                        : user.userLain(
-                                            id,
-                                            lamapengeringan,
-                                            lamapenyimpanan,
-                                            kadarair,
-                                            derajatsosoh,
-                                            beraskepala,
-                                            butirpatah,
-                                            butirgabah,
-                                            bendalain,
-                                            jumlah)),
+                                        ? userConsumer()
+                                        : usermanufacturer()),
                           ),
                         )
                       ],
                     )
-                  : const Text("error bos");
+                  : const Text("Error");
             },
           ),
         )));
