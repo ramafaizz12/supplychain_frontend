@@ -11,18 +11,16 @@ class LoginAndAuthBloc extends Bloc<LoginAndAuthEvent, LoginAndAuthState> {
   AuthBloc? authbloc;
   LoginAndAuthBloc({AuthService? auth, AuthBloc? authbloc})
       : super(LoginAndAuthInitial()) {
-    on<LoginAndAuthEvent>((event, emit) async {
-      if (event is LoginButton) {
-        emit(LoginLoaded());
-        try {
-          final token = await auth!
-              .loginapi(event.email, event.password, event.organization);
-          authbloc!.add(Loggedin(token: "Bearer $token"));
+    on<LoginButton>((event, emit) async {
+      emit(LoginLoaded());
+      try {
+        final token = await auth!
+            .loginapi(event.email, event.password, event.organization);
+        authbloc!.add(Loggedin(token: "Bearer $token"));
 
-          emit(LoginAndAuthInitial(org: event.organization));
-        } catch (e) {
-          emit(LoginFailure(error: e.toString()));
-        }
+        emit(LoginAndAuthInitial(org: event.organization));
+      } catch (e) {
+        emit(LoginFailure(error: e.toString()));
       }
     });
   }
