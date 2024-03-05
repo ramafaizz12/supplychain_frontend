@@ -5,44 +5,8 @@ Widget userConsumer() {
   return LayoutBuilder(
     builder: (context, p1) => BlocBuilder<SupplychainBloc, SupplychainState>(
       builder: (context, state) {
-        return state is! DataBerasLoaded
+        return state is DataBerasLoaded
             ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      "Mohon Untuk Konfirmasi ID",
-                      style: textpoppins.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: p1.maxWidth * 0.055),
-                    ),
-                  ),
-                  SizedBox(
-                    height: p1.maxHeight * 0.04,
-                  ),
-                  InputWidget(
-                    namainput: "ID",
-                    fontsize: p1.maxHeight * 0.02,
-                    controller: id,
-                  ),
-                  SizedBox(
-                    height: p1.maxHeight * 0.03,
-                  ),
-                  Center(
-                    child: ButtonUtama(
-                      width: p1.maxWidth * 0.4,
-                      height: p1.maxHeight * 0.06,
-                      namabutton: "Konfirmasi ID",
-                      voidcallback: () {
-                        context
-                            .read<SupplychainBloc>()
-                            .add(GetDataBeras(id: id.text));
-                      },
-                    ),
-                  )
-                ],
-              )
-            : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -137,6 +101,42 @@ Widget userConsumer() {
                       ),
                     ),
                   ),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Text(
+                      "Mohon Untuk Konfirmasi ID",
+                      style: textpoppins.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: p1.maxWidth * 0.055),
+                    ),
+                  ),
+                  SizedBox(
+                    height: p1.maxHeight * 0.04,
+                  ),
+                  InputWidget(
+                    namainput: "ID",
+                    fontsize: p1.maxHeight * 0.02,
+                    controller: id,
+                  ),
+                  SizedBox(
+                    height: p1.maxHeight * 0.03,
+                  ),
+                  Center(
+                    child: ButtonUtama(
+                      width: p1.maxWidth * 0.4,
+                      height: p1.maxHeight * 0.06,
+                      namabutton: "Konfirmasi ID",
+                      voidcallback: () {
+                        context
+                            .read<SupplychainBloc>()
+                            .add(GetDataBeras(id: id.text));
+                      },
+                    ),
+                  )
                 ],
               );
       },

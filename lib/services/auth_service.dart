@@ -101,10 +101,8 @@ class AuthService {
     return databeras;
   }
 
-  Future<bool> transferasset({
+  Future<bool> transferassetToWholesaler({
     String? id,
-    String? tanggaldiolah,
-    String? alamatperusahaan,
     String? jumlah,
   }) async {
     var token = await gettoken();
@@ -114,13 +112,56 @@ class AuthService {
       'Authorization': token,
       'Accept': 'application/json',
     };
-    dio.options.baseUrl = '$ip/AssetTransfer';
+    dio.options.baseUrl = '$ip/TransferToWholesaler';
 
     var formdata = FormData.fromMap({
       'Id': id,
-      'Tanggal_Diolah': tanggaldiolah,
-      'Alamat_Perusahaan': alamatperusahaan,
       'Jumlah': jumlah,
+    });
+    var response = await dio.post(
+      dio.options.baseUrl,
+      data: formdata,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> transferassetToDistributor({
+    String? id,
+    String? lamapengeringan,
+    String? lamapenyimpanan,
+    String? kadarair,
+    String? derajatsosoh,
+    String? beraskepala,
+    String? butirpatah,
+    String? butirgabah,
+    String? bendalain,
+    String? jumlah,
+  }) async {
+    var token = await gettoken();
+    var ip = await servis.getdataip();
+    var dio = Dio();
+    dio.options.headers = {
+      'Authorization': token,
+      'Accept': 'application/json',
+    };
+    dio.options.baseUrl = '$ip/TransferToDistributor';
+
+    var formdata = FormData.fromMap({
+      'Id': id,
+      'Jumlah': jumlah,
+      'Lama_Pengeringan': lamapengeringan,
+      'Lama_penyimpanan': lamapenyimpanan,
+      'Kadar_Air': kadarair,
+      'Derajat_sosoh': derajatsosoh,
+      'Beras_kepala': beraskepala,
+      'Butir_patah': butirpatah,
+      'Butir_gabah': butirgabah,
+      'Benda_lain': bendalain
     });
     var response = await dio.post(
       dio.options.baseUrl,

@@ -87,7 +87,18 @@ class _HomePageState extends State<HomePage> {
                                     ? userFarmer()
                                     : state.org == "consumer"
                                         ? userConsumer()
-                                        : usermanufacturer()),
+                                        : state.org == "manufacturer"
+                                            ? usermanufacturer()
+                                            : state.org == "distributor"
+                                                ? userdistributor()
+                                                : state.org == "wholesaler"
+                                                    ? userwholesaler()
+                                                    : Center(
+                                                        child: Text(
+                                                          "User Tidak Ditemukan",
+                                                          style: textpoppins,
+                                                        ),
+                                                      )),
                           ),
                         )
                       ],
