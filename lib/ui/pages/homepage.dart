@@ -25,10 +25,9 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: LayoutBuilder(
-          builder: (context, p1) =>
-              BlocBuilder<LoginAndAuthBloc, LoginAndAuthState>(
+          builder: (context, p1) => BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
-              return state is LoginAndAuthInitial
+              return state is AuthAuthenticated
                   ? Stack(
                       children: [
                         onstatus(),
@@ -57,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Text(
-                                      "Selamat Datang, ${state.org}",
+                                      "Selamat Datang, ${state.organization}",
                                       style: textpoppins.copyWith(
                                           color: whitecolor,
                                           fontWeight: FontWeight.bold,
@@ -83,15 +82,17 @@ class _HomePageState extends State<HomePage> {
                                     top: p1.maxHeight * 0.03,
                                     left: p1.maxHeight * 0.02,
                                     right: p1.maxHeight * 0.02),
-                                child: state.org == "farmer"
+                                child: state.organization == "farmer"
                                     ? userFarmer()
-                                    : state.org == "consumer"
+                                    : state.organization == "consumer"
                                         ? userConsumer()
-                                        : state.org == "manufacturer"
+                                        : state.organization == "manufacturer"
                                             ? usermanufacturer()
-                                            : state.org == "distributor"
+                                            : state.organization ==
+                                                    "distributor"
                                                 ? userdistributor()
-                                                : state.org == "wholesaler"
+                                                : state.organization ==
+                                                        "wholesaler"
                                                     ? userwholesaler()
                                                     : Center(
                                                         child: Text(

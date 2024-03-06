@@ -16,7 +16,8 @@ class LoginAndAuthBloc extends Bloc<LoginAndAuthEvent, LoginAndAuthState> {
       try {
         final token = await auth!
             .loginapi(event.email, event.password, event.organization);
-        authbloc!.add(Loggedin(token: "Bearer $token"));
+        authbloc!.add(Loggedin(
+            token: "Bearer $token", organization: event.organization!));
 
         emit(LoginAndAuthInitial(org: event.organization));
       } catch (e) {

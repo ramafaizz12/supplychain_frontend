@@ -1,12 +1,12 @@
 part of 'widgets.dart';
 
 class InputWidget extends StatelessWidget {
-  double? fontsize;
-  TextEditingController? controller;
-  String? namainput;
-  bool readonly;
-  void Function()? onTap;
-  InputWidget(
+  final double? fontsize;
+  final TextEditingController? controller;
+  final String? namainput;
+  final bool readonly;
+  final void Function()? onTap;
+  const InputWidget(
       {super.key,
       this.fontsize,
       this.controller,

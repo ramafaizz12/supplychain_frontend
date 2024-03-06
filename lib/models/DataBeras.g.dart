@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DataBeras.dart';
+part of 'data_beras.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

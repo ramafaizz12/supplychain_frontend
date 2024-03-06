@@ -23,6 +23,18 @@ class ManufacturerForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TimeLinePage(),
+                ));
+          },
+          icon: Icon(
+            Icons.traffic,
+            color: bluecolor,
+          )),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(

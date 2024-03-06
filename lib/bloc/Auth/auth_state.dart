@@ -5,7 +5,11 @@ abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
 
-class AuthAuthenticated extends AuthState {}
+class AuthAuthenticated extends AuthState {
+  final String? organization;
+
+  AuthAuthenticated({this.organization});
+}
 
 class AuthUthenticated extends AuthState {}
 

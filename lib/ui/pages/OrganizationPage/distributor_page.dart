@@ -8,7 +8,7 @@ Widget userdistributor() {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const ManufacturerForm(),
+                builder: (context) => const DistributorForm(),
               ));
         }
       }
@@ -24,6 +24,15 @@ class DistributorForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      floatingActionButton: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TimeLinePage(),
+                ));
+          },
+          icon: const Icon(Icons.traffic)),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(

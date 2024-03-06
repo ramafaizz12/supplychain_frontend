@@ -7,12 +7,11 @@ import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:supplychain_beras/services/firebase_service.dart';
 
-import '../models/DataBeras.dart';
+import '../models/data_beras.dart';
 
 class AuthService {
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   final FirebaseService servis = FirebaseService();
-  String? baseurl = "http://192.168.1.5:4444";
 
   Future<bool> hasToken() async {
     var value = await storage.read(key: 'token');
@@ -28,13 +27,19 @@ class AuthService {
     return value;
   }
 
+  Future<String?> getorg() async {
+    var value = await storage.read(key: 'organization');
+    return value;
+  }
+
   Future<void> deleteToken() async {
     storage.delete(key: 'token');
     storage.deleteAll();
   }
 
-  Future<void> persistToken(String token) async {
+  Future<void> persistToken(String token, String organization) async {
     await storage.write(key: 'token', value: token);
+    await storage.write(key: 'organization', value: organization);
   }
 
   Future<bool> createasset({

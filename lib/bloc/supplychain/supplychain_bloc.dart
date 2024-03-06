@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:supplychain_beras/services/auth_service.dart';
-import '../../models/DataBeras.dart';
+import '../../models/data_beras.dart';
 
 part 'supplychain_event.dart';
 part 'supplychain_state.dart';
