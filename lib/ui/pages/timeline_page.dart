@@ -6,33 +6,47 @@ class TimeLinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Timeline Asset",
-          style: textpoppins.copyWith(color: whitecolor),
+        appBar: AppBar(
+          title: Text(
+            "Timeline Asset",
+            style: textpoppins.copyWith(color: whitecolor),
+          ),
+          backgroundColor: backgroudcolor,
         ),
-        backgroundColor: backgroudcolor,
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-              width: 100,
-              height: 50,
-              child: TimelineTile(
-                axis: TimelineAxis.horizontal,
-                endChild: Text("First"),
-                isFirst: true,
-              )),
-          SizedBox(
-              width: 100,
-              height: 50,
-              child: TimelineTile(
-                axis: TimelineAxis.horizontal,
-                endChild: Text("Last"),
-                isLast: true,
-              ))
-        ],
-      ),
-    );
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 58.0),
+          child: BlocBuilder<SupplychainBloc, SupplychainState>(
+            builder: (context, state) {
+              return state is DataBerasLoaded
+                  ? ListView(
+                      children: [
+                        MyTimelineTile(
+                          isfirst: true,
+                          islast: false,
+                          ispast: state.data!.konfirmasi_manufacturer!,
+                          konfirmasi: "Konfirmasi Manufacturer",
+                        ),
+                        MyTimelineTile(
+                          isfirst: false,
+                          islast: false,
+                          ispast: state.data!.konfirmasi_distributor!,
+                          konfirmasi: "Konfirmasi Distributor",
+                        ),
+                        MyTimelineTile(
+                          isfirst: false,
+                          islast: true,
+                          ispast: state.data!.konfirmasi_wholesaler!,
+                          konfirmasi: "Konfirmasi Wholesaler",
+                        ),
+                      ],
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        color: bluecolor,
+                      ),
+                    );
+            },
+          ),
+        ));
   }
 }

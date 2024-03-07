@@ -57,6 +57,26 @@ class SupplychainBloc extends Bloc<SupplychainEvent, SupplychainState> {
       }
     });
 
+    on<TransferAssetToDistributor>((event, emit) async {
+      emit(DataBerasLoading());
+      try {
+        await auth.transferassetToDistributor(
+            id: event.id,
+            jumlah: event.jumlah,
+            lamapengeringan: event.lamapengeringan,
+            kadarair: event.kadarair,
+            derajatsosoh: event.derajatsosoh,
+            beraskepala: event.beraskepala,
+            butirpatah: event.butirpatah,
+            butirgabah: event.butirgabah,
+            bendalain: event.bendalain,
+            lamapenyimpanan: event.lamapenyimpanan);
+        emit(DataBerasSukses());
+      } catch (e) {
+        emit(DataBerasFailed(err: e.toString()));
+      }
+    });
+
     on<ToInitial>((event, emit) async {
       emit(SupplychainInitial());
     });

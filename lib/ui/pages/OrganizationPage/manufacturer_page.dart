@@ -1,19 +1,15 @@
 part of '../pages.dart';
 
 Widget usermanufacturer() {
-  return BlocListener<SupplychainBloc, SupplychainState>(
-    listener: (context, state) {
+  return BlocBuilder<SupplychainBloc, SupplychainState>(
+    builder: (context, state) {
       if (state is DataBerasLoaded) {
-        if (state.data!.konfirmasi_manufacturer != true) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ManufacturerForm(),
-              ));
+        if (state.data!.konfirmasi_manufacturer != false) {
+          return manufacturerFormulir(state.data!.ID);
         }
       }
+      return konfirmasset();
     },
-    child: checkasset(),
   );
 }
 
@@ -43,6 +39,7 @@ class ManufacturerForm extends StatelessWidget {
             color: whitecolor,
           ),
           onPressed: () {
+            context.read<SupplychainBloc>().add(ToInitial());
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

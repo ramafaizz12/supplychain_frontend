@@ -22,6 +22,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TimeLinePage(),
+                  ));
+            },
+            icon: Icon(
+              Icons.track_changes,
+              color: bluecolor,
+              size: 35,
+            )),
         resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: LayoutBuilder(

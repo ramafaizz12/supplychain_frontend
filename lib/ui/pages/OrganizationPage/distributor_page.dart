@@ -1,19 +1,15 @@
 part of '../pages.dart';
 
 Widget userdistributor() {
-  return BlocListener<SupplychainBloc, SupplychainState>(
-    listener: (context, state) {
+  return BlocBuilder<SupplychainBloc, SupplychainState>(
+    builder: (context, state) {
       if (state is DataBerasLoaded) {
-        if (state.data!.konfirmasi_distributor != true) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const DistributorForm(),
-              ));
+        if (state.data!.konfirmasi_distributor != false) {
+          return distributorFormulir(state.data!.ID);
         }
       }
+      return konfirmasset();
     },
-    child: checkasset(),
   );
 }
 
